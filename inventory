@@ -1,4 +1,4 @@
-10.0.0.211
-10.0.0.212
-10.0.0.213
-10.0.0.214
+10.0.0.211 apache_package=apache2 php_package=libapache2-mod-php
+10.0.0.212 apache_package=apache2 php_package=libapache2-mod-php
+10.0.0.213 apache_package=apache2 php_package=libapache2-mod-php
+10.0.0.214 apache_package=httpd php_package=php
