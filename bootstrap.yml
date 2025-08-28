@@ -4,15 +4,17 @@
   become: true
   pre_tasks:
 
-  - name: update repo cache (Fedora)
+  - name: install updates (Fedora)
     tags: always
     dnf:
+      update_only: yes
       update_cache: yes
     when: ansible_distribution == "Fedora"
 
-  - name: update repo cache  (Ubuntu)
+  - name: install updates (Ubuntu)
     tags: always
     apt:
+      upgrade: dist
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
@@ -20,29 +22,26 @@
   become: true
   tasks:
 
-# Opitonal: this is kept for a reason I don't know
+  - name: create simone user
+    tags: always
+    user:
+      name: simone
+      groups: root
+
   - name: add ansible ssh key for simone
     tags: always
     authorized_key:
       user: simone
       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKe0baA5jY3XyjZAvRt/1zEvlWZH+19bT2pb1lcVaMuq ansible"
 
-- hosts: workstations
-  become: true
-  tasks:
-
-  - name: install unzip
-    package:
-      name: unzip
-
-  - name: install terraform
-    unarchive:
-      src:  https://releases.hashicorp.com/terraform/1.13.0/terraform_1.13.0_linux_amd64.zip
-      dest:  /usr/local/bin
-      remote_src: yes
-      mode: 0755
+  - name: add sudoers file for simone
+    tags: always
+    copy:
+      src: sudoer_simone
+      dest: /etc/sudoers.d/simone
       owner: root
       group: root
+      mode: 0440
 
 - hosts: web_servers
   become: true
