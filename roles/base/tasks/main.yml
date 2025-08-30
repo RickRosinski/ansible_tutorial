@@ -1,0 +1,7 @@
+# Opitonal: this is kept for a reason I don't know
+- name: add ansible ssh key for simone
+  tags: always
+  authorized_key:
+    user: simone
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKe0baA5jY3XyjZAvRt/1zEvlWZH+19bT2pb1lcVaMuq ansible"
+

@@ -1,0 +1,13 @@
+- name: install mariadb (Fedora)
+  tags: fedora,mariadb,db
+  dnf:
+    name: mariadb
+    state: latest
+  when: ansible_distribution == "Fedora"
+
+- name:  install mariadb (Ubuntu)
+  tags: ubuntu,mariadb,db
+  apt:
+    name: mariadb-server
+    state: latest
+  when: ansible_distribution == "Ubuntu"
